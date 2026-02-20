@@ -337,7 +337,7 @@ export default function FluencyMode() {
 
             <p className="text-xs opacity-30 text-center font-mono">
               La traducción al español solo aparece DESPUÉS de hablar. Eso es intencional. 🧠
-            </div>
+            </p>
 
             <p className="text-xs opacity-40 text-center font-mono">
               The Spanish translation only appears AFTER you speak. That's intentional. 🧠
