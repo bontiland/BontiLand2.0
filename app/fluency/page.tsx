@@ -162,8 +162,7 @@ export default function FluencyMode() {
   const progress = (phrasesCompleted / TARGET) * 100;
 
   return (
-    <main className="min-h-dvh bg-paper flex flex-col max-w-md mx-auto px-4 py-6 gap-4 page-enter">
-      {/* Header */}
+    <main key="fluency-root" className="min-h-dvh bg-paper flex flex-col max-w-md mx-auto px-4 py-6 gap-4 page-enter">
       <div className="flex items-center gap-3">
         <Link href="/" className="text-2xl btn-press">
           {"←"}
@@ -181,18 +180,4 @@ export default function FluencyMode() {
           {phrasesCompleted}/{TARGET}
         </span>
       </div>
-
-      <div className="text-center">
-        <span className="font-mono text-xs opacity-30">
-          {Math.floor(sessionSeconds / 60)}:
-          {String(sessionSeconds % 60).padStart(2, "0")}
-        </span>
-      </div>
-
-      <div className="flex-1 flex flex-col items-center justify-center gap-6">
-        {/* Aquí va todo tu bloque de stages (ready, listen, etc.) */}
-        {/* Asegúrate de que todos los {stage === "..." && (...)} estén cerrados */}
-      </div>
-    </main>
-  );
 }
