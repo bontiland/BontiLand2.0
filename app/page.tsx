@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { WelcomeTour, useShouldShowTour } from "@/components/WelcomeTour";
 import Link from "next/link";
 import { loadData, getLevelTitle, getTodayRecord, getToday, saveData, recordSession } from "@/lib/store";
 import type { UserData, DayRecord } from "@/lib/store";
@@ -68,12 +69,18 @@ export default function Dashboard() {
   const [data, setData] = useState<UserData | null>(null);
   const [today, setToday] = useState<DayRecord | undefined>();
   const [streakSaved, setStreakSaved] = useState(false);
+  const [showTour, setShowTour] = useState(false);
+  const shouldShowTour = useShouldShowTour();
 
   useEffect(() => {
     const d = loadData();
     setData(d);
     setToday(getTodayRecord(d));
   }, []);
+
+  useEffect(() => {
+    if (shouldShowTour) setShowTour(true);
+  }, [shouldShowTour]);
 
   if (!data) return null;
 
@@ -228,6 +235,8 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+
+      {showTour && <WelcomeTour onDone={() => setShowTour(false)} />}
 
       <p className="text-center text-xs opacity-25 font-mono pb-2">
         Think in English. Speak without translating. 🇺🇸

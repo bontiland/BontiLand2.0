@@ -6,6 +6,8 @@ import { FLUENCY_PHRASES, createShuffledQueue } from "@/lib/phrases";
 import type { Phrase } from "@/lib/phrases";
 import { speak, stopSpeaking, startListening, stopListening, type RecognitionStatus } from "@/lib/speech";
 import { loadData, saveData, recordSession } from "@/lib/store";
+import { detectSpanish } from "@/lib/spanishDetector";
+import type { SpanishDetectionResult } from "@/lib/spanishDetector";
 
 type Stage = "ready" | "listen" | "memorize" | "speak" | "result" | "done";
 
@@ -52,6 +54,7 @@ export default function FluencyMode() {
   const [phrasesCompleted, setPhrasesCompleted] = useState(0);
   const [transcript, setTranscript] = useState("");
   const [score, setScore] = useState(0);
+  const [spanishResult, setSpanishResult] = useState<SpanishDetectionResult | null>(null);
   const [recStatus, setRecStatus] = useState<RecognitionStatus>("idle");
   
   const sessionStartRef = useRef(Date.now());
@@ -96,6 +99,8 @@ export default function FluencyMode() {
         setTranscript(res.transcript);
         const s = similarity(res.transcript, phrase.text);
         setScore(s);
+        const spanish = detectSpanish(res.transcript);
+        setSpanishResult(spanish.isSpanish ? spanish : null);
         setStage("result");
       },
       (status) => {
@@ -136,6 +141,7 @@ export default function FluencyMode() {
       setQueueIndex((i) => i + 1);
       setTranscript("");
       setScore(0);
+      setSpanishResult(null);
       setRecStatus("idle");
       setShowHint(false);
       setStage("listen");
@@ -149,6 +155,7 @@ export default function FluencyMode() {
     stopListening();
     setTranscript("");
     setScore(0);
+    setSpanishResult(null);
     setStage("result");
   };
 
@@ -302,6 +309,34 @@ export default function FluencyMode() {
                   💡 No mic detected — Chrome works best for speech recognition
                 </p>
               )}
+            </div>
+
+            {/* SPANISH DETECTED CARD */}
+            {spanishResult && (
+              <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 w-full animate-fade-in">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xl">🇪🇸</span>
+                  <p className="font-display font-bold text-amber-800 text-sm">{spanishResult.feedback}</p>
+                </div>
+                <p className="text-xs text-amber-700 font-mono mb-2">{spanishResult.tip}</p>
+                <div className="bg-amber-100 rounded-xl p-3">
+                  <p className="text-xs text-amber-800 font-mono opacity-80">
+                    💡 Tip: cuando sientas que vas a decir una palabra en español, pausa 1 segundo y busca el equivalente en inglés. Con práctica se vuelve automático.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {spanishResult === null && transcript && score < 50 && (
+              <div className="bg-sky/10 border border-sky/30 rounded-2xl p-3 w-full animate-fade-in">
+                <p className="text-xs text-sky font-mono">
+                  🔄 No te preocupes — lo importante es que hablaste. Inténtalo de nuevo en la próxima ronda.
+                </p>
+              </div>
+            )}
+
+            <p className="text-xs opacity-30 text-center font-mono">
+              La traducción al español solo aparece DESPUÉS de hablar. Eso es intencional. 🧠
             </div>
 
             <p className="text-xs opacity-40 text-center font-mono">
