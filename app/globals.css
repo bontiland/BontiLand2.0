@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #1a1a2e;
+  --paper: #f4f1eb;
+  --sage: #7fb069;
+  --coral: #e07a5f;
+  --sky: #81b4e0;
+  --gold: #f2cc8f;
+  --mist: #e8e4dc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--paper);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove all scrollbars on mobile modes */
+.no-scroll {
+  overflow: hidden;
+  height: 100dvh;
+}
+
+/* Custom button press effect */
+.btn-press {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.btn-press:active {
+  transform: scale(0.96);
+}
+
+/* Smooth page transitions */
+.page-enter {
+  animation: slideUp 0.35s ease forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Streak fire animation */
+@keyframes flicker {
+  0%, 100% { transform: scaleY(1) rotate(-2deg); }
+  50%       { transform: scaleY(1.08) rotate(2deg); }
+}
+.flicker {
+  animation: flicker 1.2s ease-in-out infinite;
+}
+
+/* Progress ring */
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.8s ease;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* Pulse listening indicator */
+@keyframes ripple {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0;   }
+}
+.ripple-ring {
+  animation: ripple 1.4s ease-out infinite;
+}
