@@ -35,21 +35,21 @@ export const FLUENCY_PHRASES: Phrase[] = [
 ];
 
 export const ANTI_BLOCK_PHRASES: Phrase[] = [
-  { text: "Let me think...", tip: "Buy time without going silent" },
-  { text: "That's a good question.", tip: "Classic filler — buys you 2 seconds" },
-  { text: "How do I put this...", tip: "Shows you're thinking, not stuck" },
-  { text: "I mean...", tip: "Natural transition while you think" },
-  { text: "Actually, you know what?", tip: "Redirect + buy time" },
-  { text: "It's kind of like...", tip: "Start a comparison to gain traction" },
-  { text: "I was just thinking about this...", tip: "Engage while gathering thoughts" },
-  { text: "Off the top of my head...", tip: "Sets low-stakes expectation" },
-  { text: "Something I've noticed is...", tip: "Opens personal observation" },
-  { text: "So basically what I'm trying to say is...", tip: "Restart clearly" },
-  { text: "Bear with me here...", tip: "Ask for patience naturally" },
-  { text: "The thing is...", tip: "Signals you have a point coming" },
-  { text: "What I find interesting is...", tip: "Redirect to something you know" },
-  { text: "From my experience...", tip: "Anchor to personal knowledge" },
-  { text: "If I had to guess...", tip: "Makes uncertainty okay" },
+  { text: "Let me think...", category: "filler", tip: "Buy time without going silent" },
+  { text: "That's a good question.", category: "filler", tip: "Classic filler — buys you 2 seconds" },
+  { text: "How do I put this...", category: "filler", tip: "Shows you're thinking, not stuck" },
+  { text: "I mean...", category: "filler", tip: "Natural transition while you think" },
+  { text: "Actually, you know what?", category: "filler", tip: "Redirect + buy time" },
+  { text: "It's kind of like...", category: "filler", tip: "Start a comparison to gain traction" },
+  { text: "I was just thinking about this...", category: "filler", tip: "Engage while gathering thoughts" },
+  { text: "Off the top of my head...", category: "filler", tip: "Sets low-stakes expectation" },
+  { text: "Something I've noticed is...", category: "filler", tip: "Opens personal observation" },
+  { text: "So basically what I'm trying to say is...", category: "filler", tip: "Restart clearly" },
+  { text: "Bear with me here...", category: "filler", tip: "Ask for patience naturally" },
+  { text: "The thing is...", category: "filler", tip: "Signals you have a point coming" },
+  { text: "What I find interesting is...", category: "filler", tip: "Redirect to something you know" },
+  { text: "From my experience...", category: "filler", tip: "Anchor to personal knowledge" },
+  { text: "If I had to guess...", category: "filler", tip: "Makes uncertainty okay" },
 ];
 
 export const TOPICS_60S: string[] = [
