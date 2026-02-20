@@ -332,7 +332,7 @@ export default function FluencyMode() {
                 <p className="text-xs text-sky font-mono">
                   🔄 No te preocupes — lo importante es que hablaste. Inténtalo de nuevo en la próxima ronda.
                 </p>
-              </p>
+              </div>
             )}
 
             <p className="text-xs opacity-30 text-center font-mono">
